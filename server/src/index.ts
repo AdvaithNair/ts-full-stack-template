@@ -2,6 +2,9 @@ import express from 'express';
 import cors from 'cors';
 import { BACKEND_PORT, FRONTEND_URLS, DB_NAME } from '@app/common';
 import { createConnection } from 'typeorm';
+import apiRouter from './routes/apiRoutes';
+import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 
 const main = async () => {
   // Connect to Database
@@ -13,11 +16,19 @@ const main = async () => {
     username: 'postgres',
     password: 'postgres',
     database: DB_NAME,
-    entities: [__dirname + '/../entities/*.*']
+    synchronize: true,
+    logging: true,
+    entities: [__dirname + '/entities/*.{ts,js}']
   });
 
   // Express App
   const app = express();
+
+  // Body Parser Middleware
+  app.use(bodyParser.json());
+
+  // Cookie Parser Middleware
+  app.use(cookieParser());
 
   // CORS Middleware
   app.use(
@@ -26,6 +37,9 @@ const main = async () => {
       origin: FRONTEND_URLS
     })
   );
+
+  // API Router
+  app.use('/api', apiRouter);
 
   // Testing Endpoint
   app.get('/ping', (_req, res) => {

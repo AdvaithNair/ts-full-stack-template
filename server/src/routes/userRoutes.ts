@@ -1,20 +1,21 @@
 import express from 'express';
-import tokenController from '../controllers/tokenController';
-import userController from '../controllers/userController';
+import * as tokenController from '../controllers/tokenController';
+import * as userController from '../controllers/userController';
 
 const userRouter = express.Router();
 
 // Sign Up User (Register)
+userRouter.get('/', (_req, res) => res.send('user'));
 userRouter.post(
   '/signup',
-  userController.createUser,
+  userController.signup,
   tokenController.setTokensEnd
 );
 
 // Sign In User (Login)
 userRouter.post(
   '/signin',
-  userController.verifyUser,
+  userController.signin,
   tokenController.setTokensEnd
 );
 
@@ -22,7 +23,7 @@ userRouter.post(
 userRouter.post(
   '/logout',
   tokenController.validateUser,
-  userController.newLogout
+  userController.logout
 );
 
 export default userRouter;

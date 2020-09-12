@@ -1,6 +1,3 @@
-const oneDay: number = 1000 * 60 * 60 * 24;
-const oneMinute: number = 1000 * 60;
-
 export const USER_ROLES = {
   USER: 'USER',
   ADMIN: 'ADMIN',
@@ -15,8 +12,8 @@ export const COOKIE_NAMES = {
 export const TOKEN_DURATIONS = {
   ACCESS: '15m',
   REFRESH: '30d',
-  ACCESS_DATE: new Date(Date.now() + oneMinute * 15),
-  REFRESH_DATE: new Date(Date.now() + oneDay * 30)
+  ACCESS_DATE: new Date(Date.now() + 1000 * 60 * 15),
+  REFRESH_DATE: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30)
 };
 
 export const ERRORS = {

@@ -3,8 +3,6 @@ import { TOKEN_DURATIONS, COOKIE_NAMES, JWT_CRYPTO, ERRORS } from '@app/common';
 import { verify, sign } from 'jsonwebtoken';
 import User from '../entities/user';
 
-const tokenController: { [k: string]: any } = {};
-
 const errorMessage = {
   error: ERRORS.AUTH.UNAUTHORIZED
 };
@@ -40,7 +38,8 @@ const verifyRefresh = (refreshToken: string) => {
   return verify(refreshToken, JWT_CRYPTO.REFRESH);
 };
 
-tokenController.setTokensEnd = (_req: Request, res: Response) => {
+// Endware to set tokens and return user
+export const setTokensEnd = (_req: Request, res: Response, _next: NextFunction) => {
   const { payload } = res.locals;
 
   try {
@@ -60,7 +59,8 @@ tokenController.setTokensEnd = (_req: Request, res: Response) => {
   }
 };
 
-tokenController.validateUser = async (
+// Middleware to validate user
+export const validateUser = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -116,5 +116,3 @@ tokenController.validateUser = async (
 
   next();
 };
-
-export default tokenController;

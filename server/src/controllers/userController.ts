@@ -4,19 +4,20 @@ import { BCRYPT_SALT, ERRORS, COOKIE_NAMES } from '@app/common';
 import User from '../entities/user';
 import { getConnection } from 'typeorm';
 
-const userController: { [k: string]: any } = {};
-
 const checkCreds = async (res: Response, email: string) => {
   try {
     // Gets User by Email
     const user = await User.findOne({ email });
 
-    // Exits if User Does Not Exist
-    if (!user) throw new Error();
+    if (!user)
+      return {
+        payload: {},
+        password: '',
+        exists: false
+      };
 
-    const hash = user.password;
-
-    delete user.password;
+    const hash = user!.password;
+    delete user!.password;
 
     return {
       payload: user,
@@ -32,7 +33,7 @@ const checkCreds = async (res: Response, email: string) => {
 };
 
 // Signup Route
-userController.signup = async (
+export const signup = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -57,6 +58,7 @@ userController.signup = async (
       password: hashedPassword,
       username
     }).save();
+    delete user.password;
 
     // Sets Payload of res.locals
     res.locals = {
@@ -75,7 +77,7 @@ userController.signup = async (
 };
 
 // Signin Route
-userController.signin = async (
+export const signin = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -117,7 +119,7 @@ userController.signin = async (
 };
 
 // Logout Route
-userController.logout = async (_req: Request, res: Response) => {
+export const logout = async (_req: Request, res: Response) => {
   try {
     // Throws Error if User isn't in Payload (logged in)
     if (!res.locals.payload.id) throw new Error();
@@ -127,6 +129,7 @@ userController.logout = async (_req: Request, res: Response) => {
       .createQueryBuilder()
       .update(User)
       .set({ count: () => 'count + 1' })
+      .where('id = :id', { id: res.locals.payload.id })
       .execute();
 
     // Clears Cookies
@@ -142,5 +145,3 @@ userController.logout = async (_req: Request, res: Response) => {
     });
   }
 };
-
-export default userController;

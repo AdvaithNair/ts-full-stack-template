@@ -4,9 +4,10 @@
     "module": "commonjs",
     "lib": ["dom", "es6", "es2017", "esnext.asynciterable"],
     "sourceMap": true,
-    "outDir": "./dist",
+    "rootDir": "src",
+    "outDir": "dist",
     "moduleResolution": "node",
-    "declaration": false,
+    "declaration": true,
     "composite": false,
     "removeComments": true,
     "noImplicitAny": true,
@@ -21,8 +22,7 @@
     "esModuleInterop": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "skipLibCheck": true,
-    "rootDir": "src"
+    "skipLibCheck": true
   },
   "exclude": ["node_modules"],
   "include": ["./src/**/*.tsx", "./src/**/*.ts"]

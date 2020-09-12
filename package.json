@@ -21,6 +21,9 @@
   },
   "scripts": {
     "web": "yarn --cwd web start",
-    "server": "yarn --cwd server start"
+    "server": "yarn --cwd server start",
+    "common": "yarn --cwd common build:watch",
+    "push": "git push origin master",
+    "pull": "git pull origin master"
   }
 }
