@@ -23,7 +23,6 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "skipLibCheck": true,
-    "baseUrl": ".",
     "rootDir": "src"
   },
   "exclude": ["node_modules"],
