@@ -1,8 +1,8 @@
 import React, { useEffect, useContext } from 'react';
 import { COLORS, ReducerContext } from '@app/common';
 import { Grid } from '@material-ui/core';
-import SignInBox from '../SignIn/SignInBox';
-import SignUpBox from '../SignUp/SignUpBox';
+import SignInBox from '../signIn/SignInBox';
+import SignUpBox from '../signUp/SignUpBox';
 import { UserContext } from '../../context/context';
 
 const Landing: React.FC = () => {
