@@ -9,11 +9,17 @@ interface Props {
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   error: boolean;
   helperText: string;
-    required: boolean;
-    fullWidth: boolean;
+  required: boolean;
+  fullWidth: boolean;
 }
 
-const Password: React.FC<Props> = ({ onChange, error, helperText, required, fullWidth }) => {
+const Password: React.FC<Props> = ({
+  onChange,
+  error,
+  helperText,
+  required,
+  fullWidth
+}) => {
   const [show, setShow] = useState<boolean>(false);
 
   const handleClickShowPassword = () => {
@@ -33,8 +39,8 @@ const Password: React.FC<Props> = ({ onChange, error, helperText, required, full
       onChange={onChange}
       error={error}
       helperText={helperText}
-      variant="outlined"
-      margin="normal"
+      variant='outlined'
+      margin='normal'
       fullWidth={fullWidth}
       required={required}
       InputProps={{

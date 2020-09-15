@@ -14,21 +14,35 @@ export declare const TOKEN_DURATIONS: {
     REFRESH_DATE: Date;
 };
 export declare const ERRORS: {
+    GENERAL: {
+        EMAIL: string;
+        BLANK: string;
+        PASSWORD_SHORT: string;
+        INVALID: string;
+    };
     AUTH: {
         NOT_LOGGED_IN: string;
         UNAUTHORIZED: string;
         LOG_BACK_IN: string;
+        USER_NOT_FOUND: string;
     };
     SIGNUP: {
         EMAIL_USERNAME_IN_USE: string;
         UNABLE: string;
+        USERNAME_SHORT: string;
+        USERNAME_LONG: string;
     };
     SIGNIN: {
-        INVALID: string;
         USER_NONEXISTENT: string;
     };
     LOGOUT: {
         SUCCESS: string;
         USER_UNAVAILABLE: string;
     };
+};
+export declare const COLORS: {
+    PRIMARY: string;
+    SECONDARY: string;
+    BUBBLY_START: string;
+    BUBBLY_STOP: string;
 };
