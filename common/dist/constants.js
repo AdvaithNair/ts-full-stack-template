@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PROJECT_NAME = exports.EMAIL_REGEX = exports.BCRYPT_SALT = exports.DB_NAME = exports.BUCKET_URL = exports.FRONTEND_URLS = exports.BACKEND_URL = exports.BACKEND_PORT = void 0;
 exports.BACKEND_PORT = 4002;
 exports.BACKEND_URL = `http://localhost:${exports.BACKEND_PORT}`;
 exports.FRONTEND_URLS = [
