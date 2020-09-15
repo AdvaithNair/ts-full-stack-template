@@ -14,7 +14,7 @@ interface SignUp {
     password: string;
     firstName: string;
     lastName: string;
-    userName: string;
+    username: string;
     general?: string;
 }
 
@@ -22,7 +22,7 @@ const SignUpForm = () => {
     const blankErrors: SignUp = {
         email: '',
         password: '',
-        userName: '',
+        username: '',
         firstName: '',
         lastName: '',
         general: ''
@@ -32,24 +32,24 @@ const SignUpForm = () => {
         password: '',
         firstName: '',
         lastName: '',
-        userName: ''
+        username: ''
     });
 
     const [errors, setErrors] = useState<SignUp>(blankErrors);
     const { dispatch } = useContext<ReducerContext>(UserContext);
 
     const filterInput = () => {
-        const { email, password, firstName, lastName, userName } = input;
+        const { email, password, firstName, lastName, username } = input;
         const currentErrors: SignUp = blankErrors;
 
         //Username errors
-        if (userName === '' || userName === undefined)
-            currentErrors.userName = ERRORS.GENERAL.BLANK;
-        else if (userName.length < 3)
-            currentErrors.userName = ERRORS.SIGNUP.USERNAME_SHORT;
-        else if (userName.length > 10)
-            currentErrors.userName = ERRORS.SIGNUP.USERNAME_LONG;
-        else currentErrors.userName = '';
+        if (username === '' || username === undefined)
+            currentErrors.username = ERRORS.GENERAL.BLANK;
+        else if (username.length < 3)
+            currentErrors.username = ERRORS.SIGNUP.USERNAME_SHORT;
+        else if (username.length > 10)
+            currentErrors.username = ERRORS.SIGNUP.USERNAME_LONG;
+        else currentErrors.username = '';
 
         //First Name errors
         if (firstName === '' || firstName === undefined)
@@ -83,7 +83,7 @@ const SignUpForm = () => {
             password: currentErrors.password,
             firstName: currentErrors.firstName,
             lastName: currentErrors.lastName,
-            userName: currentErrors.userName,
+            username: currentErrors.username,
             general: currentErrors.general
         };
     };
@@ -147,9 +147,9 @@ const SignUpForm = () => {
                 </Grid>
             </Grid>
             <TextEntry
-                error={Boolean(errors.userName)}
-                onChange={e => setInput({ ...input, userName: e.target.value })}
-                helperText={errors.userName}
+                error={Boolean(errors.username)}
+                onChange={e => setInput({ ...input, username: e.target.value })}
+                helperText={errors.username}
                 fullWidth={true}
                 required={true}
                 label={'Username'}
