@@ -10,7 +10,6 @@ interface Props {
 }
 
 const BasicAppBar: React.FC<Props> = ({title, buttonText, route}) => {
-
     return (
         <div>
             <AppBar position="static">
