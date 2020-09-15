@@ -24,6 +24,7 @@
     "server": "yarn --cwd server start",
     "common": "yarn --cwd common build:watch",
     "push": "git push origin master",
+    "pusha": "git push origin devAdvaith",
     "pull": "git pull origin master"
   }
 }
