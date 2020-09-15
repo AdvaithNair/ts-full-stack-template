@@ -29,6 +29,7 @@ const SignInForm = () => {
     const { dispatch } = useContext<ReducerContext>(UserContext);
 
     const filterInput = () => {
+        console.log("Filtering input")
         const { email, password } = input;
         const currentErrors: SignIn = blankErrors;
 
@@ -46,6 +47,8 @@ const SignInForm = () => {
             currentErrors.password = ERRORS.GENERAL.PASSWORD_SHORT;
         else currentErrors.password = '';
 
+        setErrors(currentErrors);
+
         return {
             email: currentErrors.email,
             password: currentErrors.password,
@@ -54,6 +57,7 @@ const SignInForm = () => {
     };
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        console.log("Submitting");
         event.preventDefault();
         if (filterInput()) {
             axios
@@ -80,7 +84,7 @@ const SignInForm = () => {
             <TextEntry
                 error={Boolean(errors.email)}
                 onChange={e => setInput({ ...input, email: e.target.value })}
-                helperText={''}
+                helperText={errors.email}
                 fullWidth={true}
                 required={true}
                 label={'Email'}
@@ -88,7 +92,7 @@ const SignInForm = () => {
             <Password
                 error={Boolean(errors.password)}
                 onChange={e => setInput({ ...input, password: e.target.value })}
-                helperText={'Enter your password'}
+                helperText={Boolean(errors.password) ? errors.password :'Enter your password'}
                 fullWidth={true}
                 required={true}
             />

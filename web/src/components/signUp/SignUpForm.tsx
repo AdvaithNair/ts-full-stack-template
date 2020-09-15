@@ -76,6 +76,8 @@ const SignUpForm = () => {
             currentErrors.password = ERRORS.GENERAL.PASSWORD_SHORT;
         else currentErrors.password = '';
 
+        setErrors(currentErrors);
+
         return {
             email: currentErrors.email,
             password: currentErrors.password,
@@ -124,7 +126,7 @@ const SignUpForm = () => {
                         <TextEntry
                             error={Boolean(errors.firstName)}
                             onChange={e => setInput({ ...input, firstName: e.target.value })}
-                            helperText={''}
+                            helperText={errors.firstName}
                             fullWidth={false}
                             required={true}
                             label={'First Name'}
@@ -136,7 +138,7 @@ const SignUpForm = () => {
                         <TextEntry
                             error={Boolean(errors.lastName)}
                             onChange={e => setInput({ ...input, lastName: e.target.value })}
-                            helperText={''}
+                            helperText={errors.lastName}
                             fullWidth={false}
                             required={true}
                             label={'Last Name'}
@@ -147,7 +149,7 @@ const SignUpForm = () => {
             <TextEntry
                 error={Boolean(errors.userName)}
                 onChange={e => setInput({ ...input, userName: e.target.value })}
-                helperText={''}
+                helperText={errors.userName}
                 fullWidth={true}
                 required={true}
                 label={'Username'}
@@ -155,7 +157,7 @@ const SignUpForm = () => {
             <TextEntry
                 error={Boolean(errors.email)}
                 onChange={e => setInput({ ...input, email: e.target.value })}
-                helperText={''}
+                helperText={errors.email}
                 fullWidth={true}
                 required={true}
                 label={'Email'}
@@ -163,7 +165,7 @@ const SignUpForm = () => {
             <Password
                 error={Boolean(errors.password)}
                 onChange={e => setInput({ ...input, password: e.target.value })}
-                helperText={'Enter a password & be careful!'}
+                helperText={Boolean(errors.password) ? errors.password : 'Enter a password & be careful!'}
                 fullWidth={true}
                 required={true}
             />
