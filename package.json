@@ -27,7 +27,7 @@
   "scripts": {
     "web": "yarn --cwd web start",
     "server": "yarn --cwd server start",
-    "common": "yarn --cwd common build",
+    "common": "yarn --cwd common tsc --watch",
     "push": "git push origin master",
     "pusha": "git push origin devAdvaith",
     "pull": "git pull origin master"
