@@ -39,7 +39,11 @@ const verifyRefresh = (refreshToken: string) => {
 };
 
 // Endware to set tokens and return user
-export const setTokensEnd = (_req: Request, res: Response, _next: NextFunction) => {
+export const setTokensEnd = (
+  _req: Request,
+  res: Response,
+  _next: NextFunction
+) => {
   const { payload } = res.locals;
 
   try {

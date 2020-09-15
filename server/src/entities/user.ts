@@ -12,14 +12,20 @@ export default class User extends BaseEntity {
   @Column('text', { unique: true })
   email: string;
 
-  @Column('text', { default: USER_ROLES.USER })
-  role: string;
+  @Column('text', { default: '' })
+  firstName: string;
+
+  @Column('text', { default: '' })
+  lastName: string;
+
+  @Column('text')
+  password: string;
 
   @Column('text', { default: `${BUCKET_URL}/profile/Default.png` })
   imageURL: string;
 
-  @Column('text')
-  password: string;
+  @Column('text', { default: USER_ROLES.USER })
+  role: string;
 
   @Column('int', { default: 0 })
   count: number;

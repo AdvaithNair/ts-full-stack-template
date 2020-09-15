@@ -1,27 +1,23 @@
-import React, {useEffect} from "react";
-import "./App.css";
-import Ping from "./components/Ping";
-import Password from "./components/Password"
-import SignInBox from "./components/signIn/signInBox";
-import SignInContainer from "./components/signIn/signInContainer";
-import { ThemeProvider } from '@material-ui/core/styles'
-import Theme from "./components/Theme";
-import SignUpContainer from "./components/signUp/signUpContainer";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import MainPage from "./components/mainPage/mainPage";
+import { ThemeProvider } from '@material-ui/core/styles';
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import './App.css';
+import Theme from './components/Theme';
+import UserProvider from './context/context';
+import Index from './pages/Index';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
+    <div className='App'>
+      <UserProvider>
         <ThemeProvider theme={Theme}>
-            <Switch>
-                <Route path="/" component={MainPage} exact />
-                <Route path="/signIn" component={SignInContainer} />
-                <Route path="/signUp" component={SignUpContainer} />
-            </Switch>
+          <Switch>
+            <Route path='/' component={Index} exact />
+          </Switch>
         </ThemeProvider>
+      </UserProvider>
     </div>
   );
-}
+};
 
 export default App;
