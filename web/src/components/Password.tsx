@@ -9,9 +9,11 @@ interface Props {
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   error: boolean;
   helperText: string;
+    required: boolean;
+    fullWidth: boolean;
 }
 
-const Password: React.FC<Props> = ({ onChange, error, helperText }) => {
+const Password: React.FC<Props> = ({ onChange, error, helperText, required, fullWidth }) => {
   const [show, setShow] = useState<boolean>(false);
 
   const handleClickShowPassword = () => {
@@ -26,17 +28,20 @@ const Password: React.FC<Props> = ({ onChange, error, helperText }) => {
 
   return (
     <TextField
-      label={'password'}
-      type={show ? 'text' : 'password'}
+      label={'Password'}
+      type={show ? 'text' : 'Password'}
       onChange={onChange}
       error={error}
       helperText={helperText}
-      fullWidth
+      variant="outlined"
+      margin="normal"
+      fullWidth={fullWidth}
+      required={required}
       InputProps={{
         endAdornment: (
           <InputAdornment position='end'>
             <IconButton
-              aria-label='toggle password visibility'
+              aria-label='Toggle Password Visibility'
               onClick={handleClickShowPassword}
               onMouseDown={handleMouseDownPassword}
             >
