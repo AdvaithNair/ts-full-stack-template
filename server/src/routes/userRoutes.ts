@@ -4,26 +4,16 @@ import * as userController from '../controllers/userController';
 
 const userRouter = express.Router();
 
+// Gets Own User Info (TODO)
+userRouter.get('/', tokenController.validateUser, userController.getOwnInfo);
+
 // Sign Up User (Register)
-userRouter.get('/', (_req, res) => res.send('user'));
-userRouter.post(
-  '/signup',
-  userController.signup,
-  tokenController.setTokensEnd
-);
+userRouter.post('/signup', userController.signup, tokenController.setTokensEnd);
 
 // Sign In User (Login)
-userRouter.post(
-  '/signin',
-  userController.signin,
-  tokenController.setTokensEnd
-);
+userRouter.post('/signin', userController.signin, tokenController.setTokensEnd);
 
 // Log Out User
-userRouter.post(
-  '/logout',
-  tokenController.validateUser,
-  userController.logout
-);
+userRouter.post('/signout', tokenController.validateUser, userController.signout);
 
 export default userRouter;

@@ -27,7 +27,7 @@ const checkCreds = async (res: Response, email: string) => {
   } catch (error) {
     console.error(error);
     return res.status(400).json({
-      error: ERRORS.SIGNIN.INVALID
+      error: ERRORS.GENERAL.INVALID
     });
   }
 };
@@ -38,7 +38,7 @@ export const signup = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { username, password, email } = req.body;
+  const { username, password, email, firstName, lastName } = req.body;
 
   try {
     // Checks if User Exists
@@ -56,7 +56,9 @@ export const signup = async (
     const user = await User.create({
       email,
       password: hashedPassword,
-      username
+      username,
+      firstName,
+      lastName
     }).save();
     delete user.password;
 
@@ -100,7 +102,7 @@ export const signin = async (
     );
     if (!isPasswordValid) {
       return res.status(400).json({
-        error: ERRORS.SIGNIN.INVALID
+        error: ERRORS.GENERAL.INVALID
       });
     }
 
@@ -113,13 +115,13 @@ export const signin = async (
   } catch (error) {
     console.error(error);
     res.status(400).json({
-      error: ERRORS.SIGNIN.INVALID
+      error: ERRORS.GENERAL.INVALID
     });
   }
 };
 
-// Logout Route
-export const logout = async (_req: Request, res: Response) => {
+// Sign Out Route
+export const signout = async (_req: Request, res: Response) => {
   try {
     // Throws Error if User isn't in Payload (logged in)
     if (!res.locals.payload.id) throw new Error();
@@ -142,6 +144,25 @@ export const logout = async (_req: Request, res: Response) => {
   } catch (error) {
     res.status(401).json({
       error: ERRORS.LOGOUT.USER_UNAVAILABLE
+    });
+  }
+};
+
+// Gets Own User
+export const getOwnInfo = async (_req: Request, res: Response) => {
+  try {
+    // Gets User
+    const user = await User.findOne(res.locals.payload.id);
+
+    // Removes Secrets
+    delete user!.password;
+    delete user!.role;
+    delete user!.count;
+
+    res.send(user);
+  } catch (error) {
+    res.status(400).json({
+      error: ERRORS.AUTH.USER_NOT_FOUND
     });
   }
 };
