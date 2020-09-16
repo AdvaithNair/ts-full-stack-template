@@ -3,7 +3,7 @@ import { reducer } from './reducer';
 import { GlobalState, ReducerContext } from '@app/common';
 
 // Initial State Object
-const initialState: GlobalState = {
+export const initialState: GlobalState = {
   authenticated: false,
   loading: false,
   isSignup: false,

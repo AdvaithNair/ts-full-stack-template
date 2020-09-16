@@ -1,13 +1,20 @@
 import Box from '@material-ui/core/Box';
 import React, { useState, useContext } from 'react';
-import { Button, Grid } from '@material-ui/core';
+import { Button, Grid, Snackbar, SnackbarContent } from '@material-ui/core';
 import Password from '../Password';
 import TextEntry from '../TextEntry';
-import { EMAIL_REGEX, ERRORS, ReducerContext } from '@app/common';
+import {
+  EMAIL_REGEX,
+  ERRORS,
+  ReducerContext,
+  CRYPTO_JS_SECRETS,
+  LOCALSTORAGE
+} from '@app/common';
 import { UserContext } from '../../context/context';
 import STATE from '../../context/state';
 import CustomLink from '../CustomLink';
 import axios from '../../utils/axios';
+import CryptoJS from 'crypto-js';
 
 interface SignUp {
   email: string;
@@ -36,6 +43,7 @@ const SignUpForm = () => {
     username: ''
   });
 
+  const [open, setOpen] = useState<string>('');
   const [errors, setErrors] = useState<SignUp>(blankErrors);
   const { dispatch } = useContext<ReducerContext>(UserContext);
 
@@ -76,16 +84,17 @@ const SignUpForm = () => {
       currentErrors.password = ERRORS.GENERAL.PASSWORD_SHORT;
     else currentErrors.password = '';
 
-    setErrors(currentErrors);
+    setErrors(prevErrors => ({ ...prevErrors, ...currentErrors }));
 
-    return {
-      email: currentErrors.email,
-      password: currentErrors.password,
-      firstName: currentErrors.firstName,
-      lastName: currentErrors.lastName,
-      username: currentErrors.username,
-      general: currentErrors.general
-    };
+    return !Object.values(currentErrors).some(x => x !== '');
+  };
+
+  const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen('');
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -102,10 +111,21 @@ const SignUpForm = () => {
                       payload: parseUser(data.loginEmail)
                     });*/
           // clearLoading(dispatch);
+          
+          // Hash Response
+          const userInfo: string = JSON.stringify(res.data);
+          const userHash: string = CryptoJS.AES.encrypt(
+            userInfo,
+            CRYPTO_JS_SECRETS.USER_DATA
+          ).toString();
+
+          // Sets to LocalStorage
+          localStorage.setItem(LOCALSTORAGE.USER, userHash);
         })
-        .catch((error: Error) => {
+        .catch((error: any) => {
           console.log(error);
           setErrors({ ...blankErrors, general: ERRORS.GENERAL.INVALID });
+          setOpen(error.response.data.error);
         });
     }
   };
@@ -183,6 +203,22 @@ const SignUpForm = () => {
           </Box>
         </Grid>
       </Grid>
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center'
+        }}
+        open={Boolean(open)}
+        onClose={handleClose}
+        autoHideDuration={6000}
+      >
+        <SnackbarContent
+          style={{
+            backgroundColor: '#cc0000'
+          }}
+          message={<span id='client-snackbar'>{open}</span>}
+        />
+      </Snackbar>
     </form>
   );
 };
