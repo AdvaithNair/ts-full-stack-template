@@ -1,4 +1,5 @@
 import STATE from './state';
+import { initialState } from './context';
 
 // Reducer Function
 export const reducer = (state: any, action: any) => {
@@ -29,6 +30,8 @@ export const reducer = (state: any, action: any) => {
         user: action.payload,
         authenticated: true
       };
+    case STATE.CLEAR_USER:
+      return initialState;
     case STATE.SET_LOADING:
       return {
         ...state,

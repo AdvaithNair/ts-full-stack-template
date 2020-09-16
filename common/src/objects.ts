@@ -50,3 +50,7 @@ export const COLORS = {
   BUBBLY_START: '#5A0073',
   BUBBLY_STOP: '#000081'
 };
+
+export const LOCALSTORAGE = {
+  USER: 'userData'
+};

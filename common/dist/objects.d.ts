@@ -46,3 +46,6 @@ export declare const COLORS: {
     BUBBLY_START: string;
     BUBBLY_STOP: string;
 };
+export declare const LOCALSTORAGE: {
+    USER: string;
+};

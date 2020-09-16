@@ -27,3 +27,19 @@ export interface UserCredentials {
   firstName: string;
   lastName: string;
 }
+
+// Axios Response
+export interface AxiosResponse {
+  data: any;
+}
+
+// Axios Error
+export interface AxiosError {
+  response: AxiosErrorData;
+}
+interface AxiosErrorData {
+  data: AxiosErrorMessage;
+}
+interface AxiosErrorMessage {
+  error: string;
+}

@@ -7,6 +7,13 @@ const userRouter = express.Router();
 // Gets Own User Info (TODO)
 userRouter.get('/', tokenController.validateUser, userController.getOwnInfo);
 
+// Verify User
+userRouter.get(
+  '/verify',
+  tokenController.validateUser,
+  userController.verifyUser
+);
+
 // Sign Up User (Register)
 userRouter.post('/signup', userController.signup, tokenController.setTokensEnd);
 
@@ -14,6 +21,10 @@ userRouter.post('/signup', userController.signup, tokenController.setTokensEnd);
 userRouter.post('/signin', userController.signin, tokenController.setTokensEnd);
 
 // Log Out User
-userRouter.post('/signout', tokenController.validateUser, userController.signout);
+userRouter.post(
+  '/signout',
+  tokenController.validateUser,
+  userController.signout
+);
 
 export default userRouter;
