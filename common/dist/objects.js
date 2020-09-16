@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.COLORS = exports.ERRORS = exports.TOKEN_DURATIONS = exports.COOKIE_NAMES = exports.USER_ROLES = void 0;
 exports.USER_ROLES = {
     USER: 'USER',
     ADMIN: 'ADMIN',
@@ -48,5 +47,8 @@ exports.COLORS = {
     SECONDARY: '#000081',
     BUBBLY_START: '#5A0073',
     BUBBLY_STOP: '#000081'
+};
+exports.LOCALSTORAGE = {
+    USER: 'userData'
 };
 //# sourceMappingURL=objects.js.map

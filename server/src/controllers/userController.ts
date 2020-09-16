@@ -166,3 +166,17 @@ export const getOwnInfo = async (_req: Request, res: Response) => {
     });
   }
 };
+
+// Verification Message Sent
+export const verifyUser = async (_req: Request, res: Response) => {
+  try {
+    const { id } = res.locals.payload;
+    res.json({
+      id
+    });
+  } catch {
+    res.status(400).json({
+      id: -1
+    });
+  }
+};
