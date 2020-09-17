@@ -50,10 +50,10 @@ exports.ERRORS = {
     }
 };
 exports.COLORS = {
-    PRIMARY: '#5A0073',
-    SECONDARY: '#000081',
-    BUBBLY_START: '#5A0073',
-    BUBBLY_STOP: '#000081'
+    PRIMARY: '#28430A',
+    SECONDARY: '#507B00',
+    BUBBLY_START: '#7B4425',
+    BUBBLY_STOP: '#A7D930'
 };
 exports.LOCALSTORAGE = {
     USER: 'userData'
