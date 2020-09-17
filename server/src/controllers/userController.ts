@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcrypt';
-import { BCRYPT_SALT, ERRORS, COOKIE_NAMES } from '@app/common';
+import { BCRYPT_SALT, ERRORS, COOKIE_NAMES, BUCKET_URL } from '@app/common';
 import User from '../entities/user';
 import { getConnection } from 'typeorm';
 
@@ -148,6 +148,29 @@ export const signout = async (_req: Request, res: Response) => {
   }
 };
 
+// Updates User Info
+export const updateUser = async (req: Request, res: Response) => {
+  try {
+    // Query User
+    const { id } = res.locals.payload;
+
+    // Filter Parameters
+    Object.keys(req.body).forEach(key => {
+      req.body[key] == '' && delete req.body[key];
+    });
+
+    // Save User
+    await User.save({ ...req.body, id });
+    const user = await User.findOne(id);
+
+    res.json(user);
+  } catch {
+    res.status(400).json({
+      error: ERRORS.UPDATE_USER.UNABLE
+    });
+  }
+};
+
 // Gets Own User
 export const getOwnInfo = async (_req: Request, res: Response) => {
   try {
@@ -177,6 +200,28 @@ export const verifyUser = async (_req: Request, res: Response) => {
   } catch {
     res.status(400).json({
       id: -1
+    });
+  }
+};
+
+// Upload Image
+export const uploadProfilePicture = async (req: Request, res: Response) => {
+  try {
+    // Get File
+    const file = req.file;
+    if (!file) throw new Error();
+
+    // Remove Username from Request Object
+    delete (req as any).username;
+
+    // Send New Image URL
+    const imageURL = `${BUCKET_URL}/uploads/profile-pictures/${file.filename}`;
+    res.send({
+      imageURL
+    });
+  } catch {
+    res.status(400).json({
+      error: ERRORS.FILE_UPLOAD.NO_FILE
     });
   }
 };

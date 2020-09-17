@@ -1,6 +1,7 @@
 import express from 'express';
 import * as tokenController from '../controllers/tokenController';
 import * as userController from '../controllers/userController';
+import * as multerController from '../controllers/multerController';
 
 const userRouter = express.Router();
 
@@ -25,6 +26,22 @@ userRouter.post(
   '/signout',
   tokenController.validateUser,
   userController.signout
+);
+
+// Update User
+userRouter.put(
+  '/update',
+  tokenController.validateUser,
+  userController.updateUser
+);
+
+// Upload Profile Picture
+userRouter.post(
+  '/upload-profile-picture',
+  tokenController.validateUser,
+  multerController.prepareUpload,
+  multerController.uploadProfile,
+  userController.uploadProfilePicture
 );
 
 export default userRouter;
