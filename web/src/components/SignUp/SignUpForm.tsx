@@ -15,6 +15,7 @@ import STATE from '../../context/state';
 import CustomLink from '../CustomLink';
 import axios from '../../utils/axios';
 import CryptoJS from 'crypto-js';
+import CustomSnackbar from "../Snackbar";
 
 interface SignUp {
   email: string;
@@ -89,13 +90,6 @@ const SignUpForm = () => {
     return !Object.values(currentErrors).some(x => x !== '');
   };
 
-  const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen('');
-  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -203,22 +197,7 @@ const SignUpForm = () => {
           </Box>
         </Grid>
       </Grid>
-      <Snackbar
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center'
-        }}
-        open={Boolean(open)}
-        onClose={handleClose}
-        autoHideDuration={6000}
-      >
-        <SnackbarContent
-          style={{
-            backgroundColor: '#cc0000'
-          }}
-          message={<span id='client-snackbar'>{open}</span>}
-        />
-      </Snackbar>
+        <CustomSnackbar openStr={open}> </CustomSnackbar>
     </form>
   );
 };
