@@ -1,4 +1,4 @@
-import { ReducerContext } from '@app/common';
+import { ReducerContext, COLORS } from '@app/common';
 import React, { useContext, useEffect } from 'react';
 import Home from '../components/Home/Home';
 import Landing from '../components/Landing/Landing';
@@ -9,7 +9,11 @@ const Index: React.FC = () => {
   const { state } = useContext<ReducerContext>(UserContext);
 
   useEffect(() => {
-    // Disable Bubbly if Authenticated
+    let bubblyCanvas = document.querySelector("canvas");
+    bubblyCanvas!.style.display = 'none';
+    let backgroundStr = `linear-gradient(90deg, ${COLORS.PRIMARY} 45%, ${COLORS.SECONDARY} 100%)`;
+    console.log(backgroundStr);
+    document.body.style.background = backgroundStr
   }, [state.authenticated]);
 
   return (

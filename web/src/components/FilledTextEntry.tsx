@@ -9,6 +9,8 @@ interface Props {
     fullWidth: boolean;
     error: boolean;
     innerStr: string;
+    small: boolean;
+    name: string;
 }
 
 const TextEntryValued: React.FC<Props> = ({
@@ -18,8 +20,11 @@ const TextEntryValued: React.FC<Props> = ({
                                         fullWidth,
                                         label,
                                         error,
-                                        innerStr
+                                        innerStr,
+                                        small,
+                                        name
                                     }) => {
+
     const [valueStr, setValueStr] = useState<string>(innerStr);
 
     return (
@@ -34,6 +39,8 @@ const TextEntryValued: React.FC<Props> = ({
             fullWidth={fullWidth}
             required={required}
             value={valueStr}
+            name={name}
+            size={small ? 'small' : 'medium'}
         >
         </TextField>
     );

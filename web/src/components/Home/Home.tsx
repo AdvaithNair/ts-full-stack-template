@@ -10,7 +10,7 @@ const MainPage = () => {
   return (
     <div>
       <BasicAppBar
-        buttonText={`Welcome Back, ${state.user.username}`}
+        buttonText={`Welcome Back, ${state.user.firstName} ${state.user.lastName}`}
         route={''}
         title={'INSERT TITLE HERE'}
       />

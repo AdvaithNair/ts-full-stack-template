@@ -1,6 +1,6 @@
 import Box from '@material-ui/core/Box';
 import React from 'react';
-import {Divider, Grid, Hidden} from '@material-ui/core';
+import {Divider, Grid, Hidden, Tooltip} from '@material-ui/core';
 import Blurb from '../Blurb';
 import logo from '../../images/logo.png';
 import { PROJECT_NAME } from '@app/common';
@@ -23,11 +23,15 @@ const UserSettingsBox = () => {
                   alignItems="center"
               >
                   <Hidden mdUp>
+                      <Tooltip title="Upload Profile Picture" arrow>
               <img src={"https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg"} style={{borderRadius: '50%'}} width={85}/>
+                      </Tooltip>
                   </Hidden>
                   <Hidden smDown>
+                      <Tooltip title="Upload Profile Picture" arrow>
                       <img src={"https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg"} style={{borderRadius: '50%'}} width={170}/>
-                  </Hidden>
+                      </Tooltip>
+                      </Hidden>
               </Grid>
           </Grid>
         <Grid item sm>

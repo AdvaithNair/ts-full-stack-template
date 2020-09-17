@@ -94,7 +94,7 @@ const UserChangeInfoForm = () => {
         event.preventDefault();
         if (filterInput()) {
             axios //NEED NEW ROUTE
-                .post('/api/user/signup', input)
+                .post('', input)
                 .then((res: any) => {
                     // Set State Here
                     console.log(res.data);
@@ -123,6 +123,7 @@ const UserChangeInfoForm = () => {
         }
     };
 
+    console.log(input)
     return (
         <form noValidate onSubmit={handleSubmit}>
             <Grid
@@ -140,7 +141,9 @@ const UserChangeInfoForm = () => {
                             fullWidth={true}
                             required={true}
                             label={'First Name'}
-                            innerStr={input["firstName"]}
+                            innerStr={input.firstName}
+                            small={true}
+                            name={'firstName'}
                         />
                     </Box>
                 </Grid>
@@ -153,7 +156,9 @@ const UserChangeInfoForm = () => {
                             fullWidth={true}
                             required={true}
                             label={'Last Name'}
-                            innerStr={input["lastName"]}
+                            innerStr={input.lastName}
+                            small={true}
+                            name={'lastName'}
                         />
                     </Box>
                 </Grid>
@@ -165,7 +170,9 @@ const UserChangeInfoForm = () => {
                 fullWidth={true}
                 required={true}
                 label={'Username'}
-                innerStr={input["username"]}
+                innerStr={input.username}
+                small={true}
+                name={'username'}
             />
             <TextEntryValued
                 error={Boolean(errors.email)}
@@ -174,7 +181,9 @@ const UserChangeInfoForm = () => {
                 fullWidth={true}
                 required={true}
                 label={'Email'}
-                innerStr={input["email"]}
+                innerStr={input.email}
+                small={true}
+                name={'email'}
             />
             <Button type='submit' fullWidth variant='contained' color='primary'>
                 Submit Changes
