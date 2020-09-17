@@ -118,7 +118,7 @@ const UserChangeInfoForm = () => {
     }
   };
 
-  console.log(input);
+  console.log(state)
   return (
     <form noValidate onSubmit={handleSubmit}>
       <Grid
