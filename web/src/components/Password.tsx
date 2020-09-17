@@ -20,6 +20,7 @@ const Password: React.FC<Props> = ({
   required,
   fullWidth
 }) => {
+
   const [show, setShow] = useState<boolean>(false);
 
   const handleClickShowPassword = () => {
