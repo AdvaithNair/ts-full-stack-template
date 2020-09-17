@@ -26,9 +26,13 @@ const main = async () => {
 
   // Body Parser Middleware
   app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({extended: true}))
 
   // Cookie Parser Middleware
   app.use(cookieParser());
+
+  // Image Hosting Middleware
+  app.use(express.static(__dirname));
 
   // CORS Middleware
   app.use(

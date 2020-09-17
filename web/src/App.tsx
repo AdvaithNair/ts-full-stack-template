@@ -13,7 +13,7 @@ import {
 } from '@app/common';
 import CryptoJS from 'crypto-js';
 import axios from './utils/axios';
-import { AxiosError, AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import STATE from './context/state';
 
 const App: React.FC = () => {

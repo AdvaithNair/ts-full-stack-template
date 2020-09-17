@@ -5,4 +5,3 @@ export declare const JWT_CRYPTO: {
 export declare const CRYPTO_JS_SECRETS: {
     USER_DATA: string;
 };
-export declare const VERIFICATION_SUCCESS_MESSAGE: string;

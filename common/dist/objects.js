@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LOCALSTORAGE = exports.COLORS = exports.ERRORS = exports.TOKEN_DURATIONS = exports.COOKIE_NAMES = exports.USER_ROLES = void 0;
+exports.FILE_UPLOADS = exports.LOCALSTORAGE = exports.COLORS = exports.ERRORS = exports.TOKEN_DURATIONS = exports.COOKIE_NAMES = exports.USER_ROLES = void 0;
 exports.USER_ROLES = {
     USER: 'USER',
     ADMIN: 'ADMIN',
@@ -41,6 +41,13 @@ exports.ERRORS = {
     LOGOUT: {
         SUCCESS: 'Successfully Logged Out',
         USER_UNAVAILABLE: 'User Not Available'
+    },
+    UPDATE_USER: {
+        UNABLE: 'Unable To Update User'
+    },
+    FILE_UPLOAD: {
+        NO_FILE: 'Please Upload File',
+        FILENAME: 'Invalid File Name'
     }
 };
 exports.COLORS = {
@@ -51,5 +58,8 @@ exports.COLORS = {
 };
 exports.LOCALSTORAGE = {
     USER: 'userData'
+};
+exports.FILE_UPLOADS = {
+    PROFILE_PICTURE: 'profile-picture'
 };
 //# sourceMappingURL=objects.js.map

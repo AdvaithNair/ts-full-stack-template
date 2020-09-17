@@ -22,6 +22,7 @@ GET: Route for Testing API. Returns "pong!" if done right.
   - username
   - firstName
   - lastName
+  - imageURL
 
 GET: Returns User's Own User Info.
 
@@ -52,6 +53,7 @@ POST: Signs Up and Creates User. Returns User Info and Authentication Token Cook
   - username
   - firstName
   - lastName
+  - imageURL
 
 ```
 /signin
@@ -68,6 +70,7 @@ POST: Signs In User. Returns User Info and Authentication Token Cookies.
   - username
   - firstName
   - lastName
+  - imageURL
 
 ```
 /signout
@@ -79,3 +82,33 @@ POST: Signs Out User. Returns Success Message.
   - None
 - Returns
   - message
+
+```
+/update
+```
+
+PUT: Updates User Info. Returns Updated User Info.
+
+- Parameters
+  - email
+  - username
+  - firstName
+  - lastName
+- Returns
+  - id
+  - email
+  - username
+  - firstName
+  - lastName
+  - imageURL
+
+```
+/upload-profile-picture
+```
+
+POST: Uploads Profile Picture to Server. Returns New Image URL.
+
+- Parameters
+  - Image File (Form Data, key = 'profile-picture')
+- Returns
+  - imageURL

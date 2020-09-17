@@ -39,6 +39,13 @@ export declare const ERRORS: {
         SUCCESS: string;
         USER_UNAVAILABLE: string;
     };
+    UPDATE_USER: {
+        UNABLE: string;
+    };
+    FILE_UPLOAD: {
+        NO_FILE: string;
+        FILENAME: string;
+    };
 };
 export declare const COLORS: {
     PRIMARY: string;
@@ -48,4 +55,7 @@ export declare const COLORS: {
 };
 export declare const LOCALSTORAGE: {
     USER: string;
+};
+export declare const FILE_UPLOADS: {
+    PROFILE_PICTURE: string;
 };

@@ -21,7 +21,7 @@ export default class User extends BaseEntity {
   @Column('text')
   password: string;
 
-  @Column('text', { default: `${BUCKET_URL}/profile/Default.png` })
+  @Column('text', { default: `${BUCKET_URL}/uploads/profile-picture/Default.png` })
   imageURL: string;
 
   @Column('text', { default: USER_ROLES.USER })

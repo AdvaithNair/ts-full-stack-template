@@ -41,6 +41,13 @@ export const ERRORS = {
   LOGOUT: {
     SUCCESS: 'Successfully Logged Out',
     USER_UNAVAILABLE: 'User Not Available'
+  },
+  UPDATE_USER: {
+    UNABLE: 'Unable To Update User'
+  },
+  FILE_UPLOAD: {
+    NO_FILE: 'Please Upload File',
+    FILENAME: 'Invalid File Name'
   }
 };
 
@@ -53,4 +60,8 @@ export const COLORS = {
 
 export const LOCALSTORAGE = {
   USER: 'userData'
+};
+
+export const FILE_UPLOADS = {
+  PROFILE_PICTURE: 'profile-picture'
 };
