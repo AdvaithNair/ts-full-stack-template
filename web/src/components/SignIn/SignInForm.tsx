@@ -17,6 +17,7 @@ import CustomLink from '../CustomLink';
 import CryptoJS from 'crypto-js';
 import { AxiosError, AxiosResponse } from 'axios';
 import { setLoading, clearLoading } from '../../context/loading';
+import CustomSnackbar from "../Snackbar";
 
 interface SignIn {
   email: string;
@@ -95,14 +96,6 @@ const SignInForm = () => {
     }
   };
 
-  const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen('');
-  };
-
   return (
     <form noValidate onSubmit={handleSubmit}>
       <TextEntry
@@ -133,7 +126,7 @@ const SignInForm = () => {
       >
         <Grid item>
           <Box m={2}>
-            <CustomLink text={'Forgot Password?'} />
+            <CustomLink text={''} />
           </Box>
         </Grid>
         <Grid item>
@@ -145,23 +138,7 @@ const SignInForm = () => {
           </Box>
         </Grid>
       </Grid>
-      <Snackbar
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center'
-        }}
-        open={Boolean(open)}
-        onClose={handleClose}
-        autoHideDuration={3000}
-      >
-        <SnackbarContent
-          style={{
-            backgroundColor: '#cc0000',
-            margin: 'auto'
-          }}
-          message={<span id='client-snackbar'>{open}</span>}
-        />
-      </Snackbar>
+        <CustomSnackbar openStr={open}> </CustomSnackbar>
     </form>
   );
 };

@@ -12,6 +12,9 @@ import { UserContext } from '../../context/context';
 import axios from '../../utils/axios';
 import CryptoJS from 'crypto-js';
 import TextEntryValued from '../FilledTextEntry';
+import {clearLoading, setLoading} from "../../context/loading";
+import STATE from "../../context/state";
+import CustomSnackbar from "../Snackbar";
 
 interface UserInfo {
   email: string;
@@ -31,6 +34,7 @@ const blankErrors: UserInfo = {
 
 const UserChangeInfoForm = () => {
   const { state } = useContext<ReducerContext>(UserContext);
+  const { dispatch } = useContext<ReducerContext>(UserContext);
 
   const [input, setInput] = useState<UserInfo>({
     email: state.user.email,
@@ -77,34 +81,25 @@ const UserChangeInfoForm = () => {
     return !Object.values(currentErrors).some(x => x !== '');
   };
 
-  const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen('');
-  };
-
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (filterInput()) {
-      axios //NEED NEW ROUTE
-        .post('', input)
+      axios
+        .put('/api/user/update', input)
         .then((res: any) => {
           // Set State Here
-          console.log(res.data);
-          // setLoading(dispatch);
-          /*dispatch({
-                                type: STATE.SET_USER,
-                                payload: parseUser(data.loginEmail)
-                              });*/
-          // clearLoading(dispatch);
+          setLoading(dispatch);
+          dispatch({
+            type: STATE.SET_USER,
+            payload: res.data
+          });
+          clearLoading(dispatch);
 
           // Hash Response
           const userInfo: string = JSON.stringify(res.data);
           const userHash: string = CryptoJS.AES.encrypt(
-            userInfo,
-            CRYPTO_JS_SECRETS.USER_DATA
+              userInfo,
+              CRYPTO_JS_SECRETS.USER_DATA
           ).toString();
 
           // Sets to LocalStorage
@@ -118,7 +113,7 @@ const UserChangeInfoForm = () => {
     }
   };
 
-  console.log(input);
+  console.log(state)
   return (
     <form noValidate onSubmit={handleSubmit}>
       <Grid
@@ -183,22 +178,7 @@ const UserChangeInfoForm = () => {
       <Button type='submit' fullWidth variant='contained' color='primary'>
         Submit Changes
       </Button>
-      <Snackbar
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center'
-        }}
-        open={Boolean(open)}
-        onClose={handleClose}
-        autoHideDuration={6000}
-      >
-        <SnackbarContent
-          style={{
-            backgroundColor: '#cc0000'
-          }}
-          message={<span id='client-snackbar'>{open}</span>}
-        />
-      </Snackbar>
+        <CustomSnackbar openStr={open}> </CustomSnackbar>
     </form>
   );
 };

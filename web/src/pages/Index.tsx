@@ -8,13 +8,7 @@ import { UserContext } from '../context/context';
 const Index: React.FC = () => {
   const { state } = useContext<ReducerContext>(UserContext);
 
-  useEffect(() => {
-    let bubblyCanvas = document.querySelector("canvas");
-    bubblyCanvas!.style.display = 'none';
-    let backgroundStr = `linear-gradient(90deg, ${COLORS.PRIMARY} 45%, ${COLORS.SECONDARY} 100%)`;
-    console.log(backgroundStr);
-    document.body.style.background = backgroundStr
-  }, [state.authenticated]);
+
 
   return (
     <div>
