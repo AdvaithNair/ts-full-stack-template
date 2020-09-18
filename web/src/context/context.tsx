@@ -12,7 +12,9 @@ export const initialState: GlobalState = {
     email: '',
     username: '',
     firstName: '',
-    lastName: ''
+    lastName: '',
+    imageURL:
+      'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg'
   }
 };
 

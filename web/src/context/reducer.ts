@@ -1,6 +1,8 @@
 import STATE from './state';
 import { initialState } from './context';
 
+// dispatch({ type: STATE.soemthign, payload: res.data });
+
 // Reducer Function
 export const reducer = (state: any, action: any) => {
   switch (action.type) {
@@ -41,6 +43,14 @@ export const reducer = (state: any, action: any) => {
       return {
         ...state,
         loading: false
+      };
+    case STATE.SET_UPLOAD_IMAGE:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          imageURL: action.payload
+        }
       };
     default:
       return state;
