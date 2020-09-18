@@ -207,6 +207,8 @@ export const verifyUser = async (_req: Request, res: Response) => {
 // Upload Image
 export const uploadProfilePicture = async (req: Request, res: Response) => {
   try {
+    const { id } = res.locals.payload;
+
     // Get File
     const file = req.file;
     if (!file) throw new Error();
@@ -214,8 +216,17 @@ export const uploadProfilePicture = async (req: Request, res: Response) => {
     // Remove Username from Request Object
     delete (req as any).username;
 
-    // Send New Image URL
+    // Sets New Image URL
     const imageURL = `${BUCKET_URL}/uploads/profile-pictures/${file.filename}`;
+    await getConnection()
+      .createQueryBuilder()
+      .update(User)
+      .set({
+        imageURL
+      })
+      .where('id = :id', { id })
+      .execute();
+
     res.send({
       imageURL
     });

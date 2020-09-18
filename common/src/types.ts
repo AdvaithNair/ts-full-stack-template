@@ -26,6 +26,7 @@ export interface UserCredentials {
   username: string;
   firstName: string;
   lastName: string;
+  imageURL: string;
 }
 
 // Axios Response

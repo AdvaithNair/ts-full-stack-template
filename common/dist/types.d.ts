@@ -20,6 +20,7 @@ export interface UserCredentials {
     username: string;
     firstName: string;
     lastName: string;
+    imageURL: string;
 }
 export interface AxiosResponse {
     data: any;
