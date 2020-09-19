@@ -58,7 +58,6 @@ const UploadPhoto = () => {
       axios
         .post('/api/user/upload-profile-picture', formData)
         .then((res: any) => {
-          console.log(res.data);
           setLoading(dispatch);
           dispatch({ type: STATE.SET_UPLOAD_IMAGE, payload: res.data });
           clearLoading(dispatch);

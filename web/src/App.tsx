@@ -20,9 +20,8 @@ const App: React.FC = () => {
   const autoSignin = () => {
     // Sends API Request to Verify User
     axios
-      .get('/api/user/verify')
+      .get('/api/user/')
       .then((res: AxiosResponse) => {
-        console.log(res.data);
         // Sets State
         dispatch({ type: STATE.SET_USER, payload: res.data });
       })

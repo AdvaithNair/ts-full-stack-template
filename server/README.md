@@ -1,5 +1,19 @@
 # API Documentation
 
+## Types
+
+- User
+  - id
+  - email
+  - username
+  - firstName
+  - lastName
+  - imageURL
+  - facebook
+  - instagram
+  - twitter
+  - snapchat
+
 ## Routes
 
 ### /ping
@@ -10,30 +24,28 @@
 
 GET: Route for Testing API. Returns "pong!" if done right.
 
+- Returns
+  - "pong!"
+
 ### /api/users
 
 ```
 /
 ```
 
-- Returns
-  - id
-  - email
-  - username
-  - firstName
-  - lastName
-  - imageURL
-
 GET: Returns User's Own User Info.
+
+- Returns
+  - User
 
 ```
 /verify
 ```
 
-- Returns
-  - id
+GET: Returns User Info.
 
-GET: Returns User's ID for less load and to cross-check with id from localStorage.
+- Returns
+  - User
 
 ```
 /signup
@@ -48,12 +60,7 @@ POST: Signs Up and Creates User. Returns User Info and Authentication Token Cook
   - First Name
   - Last Name
 - Returns
-  - id
-  - email
-  - username
-  - firstName
-  - lastName
-  - imageURL
+  - User
 
 ```
 /signin
@@ -65,12 +72,7 @@ POST: Signs In User. Returns User Info and Authentication Token Cookies.
   - Email
   - Password
 - Returns
-  - id
-  - email
-  - username
-  - firstName
-  - lastName
-  - imageURL
+  - User
 
 ```
 /signout
@@ -95,12 +97,7 @@ PUT: Updates User Info. Returns Updated User Info.
   - firstName
   - lastName
 - Returns
-  - id
-  - email
-  - username
-  - firstName
-  - lastName
-  - imageURL
+  - User
 
 ```
 /upload-profile-picture
@@ -112,3 +109,15 @@ POST: Uploads Profile Picture to Server. Returns New Image URL.
   - Image File (Form Data, key = 'profile-picture')
 - Returns
   - imageURL
+
+```
+/update/social-media
+```
+
+PUT: Updates User Social Media. Returns User.
+
+- Parameters
+  - provider (Social Media Type: Facebook, Instagram, Twitter, Snapchat)
+  - username (Username for designated Social Media)
+- Returns
+  - User

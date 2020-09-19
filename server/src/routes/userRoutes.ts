@@ -9,11 +9,11 @@ const userRouter = express.Router();
 userRouter.get('/', tokenController.validateUser, userController.getOwnInfo);
 
 // Verify User
-userRouter.get(
+/* userRouter.get(
   '/verify',
   tokenController.validateUser,
   userController.verifyUser
-);
+); */
 
 // Sign Up User (Register)
 userRouter.post('/signup', userController.signup, tokenController.setTokensEnd);

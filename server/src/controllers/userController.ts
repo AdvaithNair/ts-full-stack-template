@@ -191,7 +191,7 @@ export const getOwnInfo = async (_req: Request, res: Response) => {
 };
 
 // Verification Message Sent
-export const verifyUser = async (_req: Request, res: Response) => {
+/* export const verifyUser = async (_req: Request, res: Response) => {
   try {
     const { id } = res.locals.payload;
 
@@ -208,7 +208,7 @@ export const verifyUser = async (_req: Request, res: Response) => {
       id: -1
     });
   }
-};
+}; */
 
 // Upload Image
 export const uploadProfilePicture = async (req: Request, res: Response) => {

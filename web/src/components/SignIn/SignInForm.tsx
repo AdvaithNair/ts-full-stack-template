@@ -33,7 +33,6 @@ const SignInForm = () => {
   const { dispatch } = useContext<ReducerContext>(UserContext);
 
   const filterInput = () => {
-    console.log('Filtering input');
     const { email, password } = input;
     const currentErrors: SignIn = blankErrors;
 
@@ -72,7 +71,6 @@ const SignInForm = () => {
         })
         .catch((error: AxiosError) => {
           console.log(error);
-          console.log(error.message);
           setErrors({ ...blankErrors, general: ERRORS.GENERAL.INVALID });
           // setOpen(error.response.data.error);
         });
