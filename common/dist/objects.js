@@ -43,7 +43,8 @@ exports.ERRORS = {
         USER_UNAVAILABLE: 'User Not Available'
     },
     UPDATE_USER: {
-        UNABLE: 'Unable To Update User'
+        UNABLE: 'Unable To Update User',
+        SOCIAL_MEDIA: 'Unable To Update Social Media'
     },
     FILE_UPLOAD: {
         NO_FILE: 'Please Upload File',

@@ -1,64 +1,50 @@
 import { ThemeProvider } from '@material-ui/core/styles';
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
-import Theme from './components/Theme';
+import theme from './utils/theme';
 import { UserContext } from './context/context';
 import Index from './pages/Index';
-import {
-  LOCALSTORAGE,
-  CRYPTO_JS_SECRETS,
-  UserCredentials,
-  ReducerContext
-} from '@app/common';
-import CryptoJS from 'crypto-js';
+import { LOCALSTORAGE, ReducerContext } from '@app/common';
 import axios from './utils/axios';
 import { AxiosResponse } from 'axios';
 import STATE from './context/state';
+import Animation from './components/General/Utility/Animation';
+import Loading from './components/Loading/Loading';
 
 const App: React.FC = () => {
-  const { dispatch } = useContext<ReducerContext>(UserContext);
+  // const [animation, setAnimation] = useState<boolean>(true);
+  const [animation, setAnimation] = useState<boolean>(true);
+  const { state, dispatch } = useContext<ReducerContext>(UserContext);
 
   const autoSignin = () => {
-    // Gets Encrypted Data
-    const userData = localStorage.getItem(LOCALSTORAGE.USER);
-
-    if (userData) {
-      // Parses LocalStorage
-      const userString = CryptoJS.AES.decrypt(
-        userData,
-        CRYPTO_JS_SECRETS.USER_DATA
-      ).toString(CryptoJS.enc.Utf8);
-      const userObject: UserCredentials = JSON.parse(userString);
-
-      // Sets State
-      dispatch({ type: STATE.SET_USER, payload: userObject });
-
-      // Sends API Request to Verify User
-      axios
-        .get('/api/user/verify')
-        .then((res: AxiosResponse) => {
-          // Compares IDs
-          if (userObject.id !== res.data.id) {
-            throw new Error();
-          }
-        })
-        .catch(() => {
-          // Logout Code
-          dispatch({ type: STATE.CLEAR_USER });
-          localStorage.clear();
-        });
-    }
+    // Sends API Request to Verify User
+    axios
+      .get('/api/user/verify')
+      .then((res: AxiosResponse) => {
+        console.log(res.data);
+        // Sets State
+        dispatch({ type: STATE.SET_USER, payload: res.data });
+      })
+      .catch(() => {
+        // Logout Code
+        dispatch({ type: STATE.CLEAR_USER });
+      });
   };
 
   // Persists User
   useEffect(() => {
     autoSignin();
+    setTimeout(() => setAnimation(false), 1950);
   }, []);
 
   return (
     <div className='App'>
-      <ThemeProvider theme={Theme}>
+      {animation && (
+        <Animation style={{ display: animation ? 'flex' : 'none' }} />
+      )}
+      {state.loading && <Loading />}
+      <ThemeProvider theme={theme}>
         <Switch>
           <Route path='/' component={Index} exact />
         </Switch>

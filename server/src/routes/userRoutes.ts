@@ -44,4 +44,11 @@ userRouter.post(
   userController.uploadProfilePicture
 );
 
+// Update Social Media
+userRouter.put(
+  '/update/social-media',
+  tokenController.validateUser,
+  userController.linkSocialMedia
+);
+
 export default userRouter;

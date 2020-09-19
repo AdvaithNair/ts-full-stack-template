@@ -11,10 +11,10 @@ import {
 import { UserContext } from '../../context/context';
 import axios from '../../utils/axios';
 import CryptoJS from 'crypto-js';
-import TextEntryValued from '../FilledTextEntry';
-import {clearLoading, setLoading} from "../../context/loading";
-import STATE from "../../context/state";
-import CustomSnackbar from "../Snackbar";
+import TextEntryValued from '../General/Entry/FilledTextEntry';
+import { clearLoading, setLoading } from '../../context/loading';
+import STATE from '../../context/state';
+import CustomSnackbar from '../General/Utility/Snackbar';
 
 interface UserInfo {
   email: string;
@@ -94,16 +94,6 @@ const UserChangeInfoForm = () => {
             payload: res.data
           });
           clearLoading(dispatch);
-
-          // Hash Response
-          const userInfo: string = JSON.stringify(res.data);
-          const userHash: string = CryptoJS.AES.encrypt(
-              userInfo,
-              CRYPTO_JS_SECRETS.USER_DATA
-          ).toString();
-
-          // Sets to LocalStorage
-          localStorage.setItem(LOCALSTORAGE.USER, userHash);
         })
         .catch((error: any) => {
           console.log(error);
@@ -113,7 +103,7 @@ const UserChangeInfoForm = () => {
     }
   };
 
-  console.log(state)
+  console.log(state);
   return (
     <form noValidate onSubmit={handleSubmit}>
       <Grid
@@ -178,7 +168,7 @@ const UserChangeInfoForm = () => {
       <Button type='submit' fullWidth variant='contained' color='primary'>
         Submit Changes
       </Button>
-        <CustomSnackbar openStr={open}> </CustomSnackbar>
+      <CustomSnackbar openStr={open}> </CustomSnackbar>
     </form>
   );
 };

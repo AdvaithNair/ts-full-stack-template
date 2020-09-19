@@ -2,7 +2,7 @@ import Box from '@material-ui/core/Box';
 import React from 'react';
 import SignUpForm from './SignUpForm';
 import { Grid, Hidden } from '@material-ui/core';
-import Blurb from '../Blurb';
+import Blurb from '../General/Misc/Blurb';
 import logo from '../../images/logo.png';
 import { PROJECT_NAME } from '@app/common';
 

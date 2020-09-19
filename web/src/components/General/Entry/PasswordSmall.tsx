@@ -11,7 +11,7 @@ interface Props {
   helperText: string;
   required: boolean;
   fullWidth: boolean;
-  label:string;
+  label: string;
 }
 
 const SmallPassword: React.FC<Props> = ({
@@ -20,9 +20,8 @@ const SmallPassword: React.FC<Props> = ({
   helperText,
   required,
   fullWidth,
-    label
+  label
 }) => {
-
   const [show, setShow] = useState<boolean>(false);
 
   const handleClickShowPassword = () => {

@@ -29,3 +29,55 @@
 .loading {
   margin: 0 auto;
 }
+
+.landing-background {
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.landing-icon {
+  width: 200px;
+  height: 200px;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+.fade-animation {
+  -webkit-animation: fadeOut 2s;
+  animation: fadeOut 2s;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  66% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.hover:hover {
+  cursor: pointer;
+}

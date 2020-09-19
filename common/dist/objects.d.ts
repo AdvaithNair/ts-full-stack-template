@@ -41,6 +41,7 @@ export declare const ERRORS: {
     };
     UPDATE_USER: {
         UNABLE: string;
+        SOCIAL_MEDIA: string;
     };
     FILE_UPLOAD: {
         NO_FILE: string;

@@ -138,7 +138,7 @@ export const signout = async (_req: Request, res: Response) => {
     res.clearCookie(COOKIE_NAMES.REFRESH);
     res.clearCookie(COOKIE_NAMES.ACCESS);
 
-    res.send({
+    res.json({
       message: 'Successfully Logged Out'
     });
   } catch (error) {
@@ -182,7 +182,7 @@ export const getOwnInfo = async (_req: Request, res: Response) => {
     delete user!.role;
     delete user!.count;
 
-    res.send(user);
+    res.json(user);
   } catch (error) {
     res.status(400).json({
       error: ERRORS.AUTH.USER_NOT_FOUND
@@ -194,9 +194,15 @@ export const getOwnInfo = async (_req: Request, res: Response) => {
 export const verifyUser = async (_req: Request, res: Response) => {
   try {
     const { id } = res.locals.payload;
-    res.json({
-      id
-    });
+
+    // Get User Data
+    const user = await User.findOne(id);
+    if (!user) throw new Error();
+    delete user.password;
+    delete user.count;
+    delete user.role;
+
+    res.json(user);
   } catch {
     res.status(400).json({
       id: -1
@@ -227,12 +233,45 @@ export const uploadProfilePicture = async (req: Request, res: Response) => {
       .where('id = :id', { id })
       .execute();
 
-    res.send({
+    res.json({
       imageURL
     });
   } catch {
     res.status(400).json({
       error: ERRORS.FILE_UPLOAD.NO_FILE
+    });
+  }
+};
+
+// Link Social Media
+export const linkSocialMedia = async (req: Request, res: Response) => {
+  try {
+    const { id } = res.locals.payload;
+    const { provider, username } = req.body;
+
+    const user = await User.findOne(id);
+    if (!user) throw new Error();
+
+    // Set URL
+    if (provider == 'Facebook')
+      user.facebook = `https://facebook.com/${username}`;
+    else if (provider == 'Instagram')
+      user.instagram = `https://instagram.com/${username}`;
+    else if (provider == 'Twitter')
+      user.twitter = `https://twitter.com/${username}`;
+    else if (provider == 'Snapchat')
+      user.snapchat = `https://snapchat.com/add/${username}`;
+    user.save();
+
+    // Filter Output
+    delete user.password;
+    delete user.count;
+    delete user.role;
+
+    res.json(user);
+  } catch {
+    res.status(400).json({
+      error: ERRORS.UPDATE_USER.SOCIAL_MEDIA
     });
   }
 };

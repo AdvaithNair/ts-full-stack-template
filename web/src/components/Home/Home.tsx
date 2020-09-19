@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import BasicAppBar from '../BasicAppBar';
+import BasicAppBar from '../General/Utility/BasicAppBar';
 import { COLORS, ReducerContext } from '@app/common';
 import { UserContext } from '../../context/context';
 import UserSettingsBox from '../UserChangeScreen/UserSettingsBox';

@@ -1,23 +1,16 @@
 import Box from '@material-ui/core/Box';
 import React, { useContext, useState } from 'react';
-import { Button, Grid, Snackbar, SnackbarContent } from '@material-ui/core';
-import Password from '../Password';
-import TextEntry from '../TextEntry';
-import {
-  EMAIL_REGEX,
-  ERRORS,
-  ReducerContext,
-  LOCALSTORAGE,
-  CRYPTO_JS_SECRETS
-} from '@app/common';
+import { Button, Grid } from '@material-ui/core';
+import Password from '../General/Entry/Password';
+import TextEntry from '../General/Entry/TextEntry';
+import { EMAIL_REGEX, ERRORS, ReducerContext, LOCALSTORAGE } from '@app/common';
 import { UserContext } from '../../context/context';
 import STATE from '../../context/state';
 import axios from '../../utils/axios';
-import CustomLink from '../CustomLink';
-import CryptoJS from 'crypto-js';
+import CustomLink from '../General/Utility/CustomLink';
 import { AxiosError, AxiosResponse } from 'axios';
 import { setLoading, clearLoading } from '../../context/loading';
-import CustomSnackbar from "../Snackbar";
+import CustomSnackbar from '../General/Utility/Snackbar';
 
 interface SignIn {
   email: string;
@@ -76,16 +69,6 @@ const SignInForm = () => {
             payload: res.data
           });
           clearLoading(dispatch);
-
-          // Hash Response
-          const userInfo: string = JSON.stringify(res.data);
-          const userHash: string = CryptoJS.AES.encrypt(
-            userInfo,
-            CRYPTO_JS_SECRETS.USER_DATA
-          ).toString();
-
-          // Sets to LocalStorage
-          localStorage.setItem(LOCALSTORAGE.USER, userHash);
         })
         .catch((error: AxiosError) => {
           console.log(error);
@@ -138,7 +121,7 @@ const SignInForm = () => {
           </Box>
         </Grid>
       </Grid>
-        <CustomSnackbar openStr={open}> </CustomSnackbar>
+      <CustomSnackbar openStr={open}> </CustomSnackbar>
     </form>
   );
 };

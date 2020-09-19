@@ -1,21 +1,15 @@
 import Box from '@material-ui/core/Box';
 import React, { useState, useContext } from 'react';
-import { Button, Grid, Snackbar, SnackbarContent } from '@material-ui/core';
-import Password from '../Password';
-import TextEntry from '../TextEntry';
-import {
-  EMAIL_REGEX,
-  ERRORS,
-  ReducerContext,
-  CRYPTO_JS_SECRETS,
-  LOCALSTORAGE
-} from '@app/common';
+import { Button, Grid } from '@material-ui/core';
+import Password from '../General/Entry/Password';
+import TextEntry from '../General/Entry/TextEntry';
+import { EMAIL_REGEX, ERRORS, ReducerContext, LOCALSTORAGE } from '@app/common';
 import { UserContext } from '../../context/context';
 import STATE from '../../context/state';
-import CustomLink from '../CustomLink';
+import CustomLink from '../General/Utility/CustomLink';
 import axios from '../../utils/axios';
-import CryptoJS from 'crypto-js';
-import CustomSnackbar from "../Snackbar";
+import CustomSnackbar from '../General/Utility/Snackbar';
+import { clearLoading, setLoading } from '../../context/loading';
 
 interface SignUp {
   email: string;
@@ -90,7 +84,6 @@ const SignUpForm = () => {
     return !Object.values(currentErrors).some(x => x !== '');
   };
 
-
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (filterInput()) {
@@ -98,23 +91,12 @@ const SignUpForm = () => {
         .post('/api/user/signup', input)
         .then((res: any) => {
           // Set State Here
-          console.log(res.data);
-          // setLoading(dispatch);
-          /*dispatch({
-                      type: STATE.SET_USER,
-                      payload: parseUser(data.loginEmail)
-                    });*/
-          // clearLoading(dispatch);
-          
-          // Hash Response
-          const userInfo: string = JSON.stringify(res.data);
-          const userHash: string = CryptoJS.AES.encrypt(
-            userInfo,
-            CRYPTO_JS_SECRETS.USER_DATA
-          ).toString();
-
-          // Sets to LocalStorage
-          localStorage.setItem(LOCALSTORAGE.USER, userHash);
+          setLoading(dispatch);
+          dispatch({
+            type: STATE.SET_USER,
+            payload: res.data
+          });
+          clearLoading(dispatch);
         })
         .catch((error: any) => {
           console.log(error);
@@ -197,7 +179,7 @@ const SignUpForm = () => {
           </Box>
         </Grid>
       </Grid>
-        <CustomSnackbar openStr={open}> </CustomSnackbar>
+      <CustomSnackbar openStr={open}> </CustomSnackbar>
     </form>
   );
 };
