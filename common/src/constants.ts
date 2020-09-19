@@ -6,7 +6,7 @@ export const FRONTEND_URLS: string[] = [
   'http://localhost:3001'
 ];
 
-export const BUCKET_URL: string = `${BACKEND_URL}/images/`;
+export const BUCKET_URL: string = `${BACKEND_URL}/public`;
 
 export const DB_NAME: string = 'app_db';
 

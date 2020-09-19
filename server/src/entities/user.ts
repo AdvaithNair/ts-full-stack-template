@@ -21,8 +21,22 @@ export default class User extends BaseEntity {
   @Column('text')
   password: string;
 
-  @Column('text', { default: `${BUCKET_URL}/profile/Default.png` })
+  @Column('text', {
+    default: `${BUCKET_URL}/uploads/profile-picture/Default.png`
+  })
   imageURL: string;
+
+  @Column('text', { nullable: true })
+  facebook: string;
+
+  @Column('text', { nullable: true })
+  instagram: string;
+
+  @Column('text', { nullable: true })
+  twitter: string;
+
+  @Column('text', { nullable: true })
+  snapchat: string;
 
   @Column('text', { default: USER_ROLES.USER })
   role: string;

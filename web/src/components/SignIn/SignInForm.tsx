@@ -1,22 +1,16 @@
 import Box from '@material-ui/core/Box';
 import React, { useContext, useState } from 'react';
-import { Button, Grid, Snackbar, SnackbarContent } from '@material-ui/core';
-import Password from '../Password';
-import TextEntry from '../TextEntry';
-import {
-  EMAIL_REGEX,
-  ERRORS,
-  ReducerContext,
-  LOCALSTORAGE,
-  CRYPTO_JS_SECRETS
-} from '@app/common';
+import { Button, Grid } from '@material-ui/core';
+import Password from '../General/Entry/Password';
+import TextEntry from '../General/Entry/TextEntry';
+import { EMAIL_REGEX, ERRORS, ReducerContext, LOCALSTORAGE } from '@app/common';
 import { UserContext } from '../../context/context';
 import STATE from '../../context/state';
 import axios from '../../utils/axios';
-import CustomLink from '../CustomLink';
-import CryptoJS from 'crypto-js';
+import CustomLink from '../General/Utility/CustomLink';
 import { AxiosError, AxiosResponse } from 'axios';
 import { setLoading, clearLoading } from '../../context/loading';
+import CustomSnackbar from '../General/Utility/Snackbar';
 
 interface SignIn {
   email: string;
@@ -39,7 +33,6 @@ const SignInForm = () => {
   const { dispatch } = useContext<ReducerContext>(UserContext);
 
   const filterInput = () => {
-    console.log('Filtering input');
     const { email, password } = input;
     const currentErrors: SignIn = blankErrors;
 
@@ -75,32 +68,13 @@ const SignInForm = () => {
             payload: res.data
           });
           clearLoading(dispatch);
-
-          // Hash Response
-          const userInfo: string = JSON.stringify(res.data);
-          const userHash: string = CryptoJS.AES.encrypt(
-            userInfo,
-            CRYPTO_JS_SECRETS.USER_DATA
-          ).toString();
-
-          // Sets to LocalStorage
-          localStorage.setItem(LOCALSTORAGE.USER, userHash);
         })
         .catch((error: AxiosError) => {
           console.log(error);
-          console.log(error.message);
           setErrors({ ...blankErrors, general: ERRORS.GENERAL.INVALID });
           // setOpen(error.response.data.error);
         });
     }
-  };
-
-  const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen('');
   };
 
   return (
@@ -133,7 +107,7 @@ const SignInForm = () => {
       >
         <Grid item>
           <Box m={2}>
-            <CustomLink text={'Forgot Password?'} />
+            <CustomLink text={''} />
           </Box>
         </Grid>
         <Grid item>
@@ -145,23 +119,7 @@ const SignInForm = () => {
           </Box>
         </Grid>
       </Grid>
-      <Snackbar
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center'
-        }}
-        open={Boolean(open)}
-        onClose={handleClose}
-        autoHideDuration={3000}
-      >
-        <SnackbarContent
-          style={{
-            backgroundColor: '#cc0000',
-            margin: 'auto'
-          }}
-          message={<span id='client-snackbar'>{open}</span>}
-        />
-      </Snackbar>
+      <CustomSnackbar openStr={open}> </CustomSnackbar>
     </form>
   );
 };

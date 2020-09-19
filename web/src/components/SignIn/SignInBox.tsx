@@ -2,7 +2,7 @@ import Box from '@material-ui/core/Box';
 import React from 'react';
 import SignInForm from './SignInForm';
 import { Grid } from '@material-ui/core';
-import Blurb from '../Blurb';
+import Blurb from '../General/Misc/Blurb';
 import logo from '../../images/logo.png';
 
 const SignInBox = () => {
