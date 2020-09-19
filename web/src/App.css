@@ -81,3 +81,45 @@
 .hover:hover {
   cursor: pointer;
 }
+
+.profile-card-image-container {
+  position: relative;
+  height: 250px;
+  width: 250px;
+  border-radius: 100%;
+  margin: 0 auto;
+}
+
+.profile-card-image {
+  display: block;
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+  border-radius: 100%;
+  margin: 0 auto;
+  margin-top: 20px;
+  border: solid 5px black;
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
+
+.profile-card-image:hover {
+  opacity: 0.5;
+}
+
+.profile-card-image-overlay {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  width: 200px;
+  border-radius: 100%;
+  opacity: 0;
+  transition: .2s ease;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.profile-card-image-container:hover .profile-card-image-overlay {
+  opacity: 1;
+}
